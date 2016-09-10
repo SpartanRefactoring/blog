@@ -8,21 +8,21 @@ import org.eclipse.jdt.annotation.*;
  * <p>
  * Implementation is with a linear hash table s, with quadratic probes (i.e.,
  * +1, +3, +6, +10, +15, ... modulo the table size). Array capacity is always a
- * power of two, and is doubled when the load goes above {@link #MAX__LOAD};
- * capacity is halved when the load drops below {@value #MIN__LOAD}. When the
- * fraction of removed keys goes below {@link #REMOVE__LOAD}, the table is
+ * power of two, and is doubled when the load goes above {@link #MAX_LOAD};
+ * capacity is halved when the load drops below {@value #MIN_LOAD}. When the
+ * fraction of removed keys goes below {@link #REMOVE_LOAD}, the table is
  * rehashed.
  * @author Yossi Gil
  * @since December 2010 */
 public class Integers {
   /** */
-  public static final float MAX__LOAD = 0.75f;
+  public static final float MAX_LOAD = 0.75f;
   /** */
-  public static final int MIN__CAPACITY = 4;
+  public static final int MIN_CAPACITY = 4;
   /** */
-  public static final float MIN__LOAD = 0.25f;
+  public static final float MIN_LOAD = 0.25f;
   /** */
-  public static final float REMOVE__LOAD = 0.20f;
+  public static final float REMOVE_LOAD = 0.20f;
 
   static int hash(final int i) {
     final int $ = i ^ i >>> 12 ^ i >>> 20;
@@ -44,14 +44,14 @@ public class Integers {
 
   /** Instantiates this class */
   public Integers() {
-    this(MIN__CAPACITY);
+    this(MIN_CAPACITY);
   }
 
   /** Instantiate this class, using a given size for the hash table.
    * @param initialCapacity suggests a hash table size, will be rounded up to
    *        the next power of two. */
   public Integers(final int initialCapacity) {
-    final int capacity = Math.max(MIN__CAPACITY, roundUp(initialCapacity));
+    final int capacity = Math.max(MIN_CAPACITY, roundUp(initialCapacity));
     data = new int @NonNull [capacity];
     occupied = new boolean @NonNull [capacity];
     placeholder = new boolean @NonNull [capacity];
@@ -69,7 +69,7 @@ public class Integers {
       return this;
     data[i] = n;
     occupied[i] = true;
-    if (++size > MAX__LOAD * capacity())
+    if (++size > MAX_LOAD * capacity())
       rehash(data.length << 1);
     return this;
   }
@@ -152,8 +152,8 @@ public class Integers {
       return this;
     assert occupied[i] && n == data[i];
     placeholder[i] = true;
-    return --size < MIN__LOAD * capacity() && capacity() > MIN__CAPACITY ? rehash(data.length >> 1)
-        : ++removed > REMOVE__LOAD * capacity() ? rehash() : this;
+    return --size < MIN_LOAD * capacity() && capacity() > MIN_CAPACITY ? rehash(data.length >> 1)
+        : ++removed > REMOVE_LOAD * capacity() ? rehash() : this;
   }
 
   /** Remove an array of integers to this set, if they are in it.
@@ -195,7 +195,7 @@ public class Integers {
    * @return <code><b>this</b></code> */
   protected Integers rehash(final int newCapacity) {
     assert (newCapacity & newCapacity - 1) == 0;
-    assert newCapacity >= MIN__CAPACITY;
+    assert newCapacity >= MIN_CAPACITY;
     return reset(newCapacity).add(entries());
   }
 
