@@ -1,5 +1,5 @@
 // <a href=http://ssdl-linux.cs.technion.ac.il/wiki/index.php>SSDLPedia</a>
-package il.org.spartan;
+package il.org.spatan.iteration;
 
 import static il.org.spartan.AssertToAzzert.*;
 import static il.org.spartan.azzert.*;
@@ -12,6 +12,7 @@ import org.junit.*;
 
 import static il.org.spartan.AssertToAzzert.*;import org.junit.*;
 
+import il.org.spartan.*;
 import il.org.spartan.streotypes.*;
 
 /** import il.org.spartan.stereotypes.Utility; /** A <b>Utility class</b>
