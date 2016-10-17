@@ -24,14 +24,14 @@ public class Integers {
   /** */
   public static final float REMOVE_LOAD = 0.20f;
 
-  static int hash(final int i) {
-    final int $ = i ^ i >>> 12 ^ i >>> 20;
+  static int hash(final int ¢) {
+    final int $ = ¢ ^ ¢ >>> 12 ^ ¢ >>> 20;
     return $ ^ $ >>> 4 ^ $ >>> 7;
   }
 
-  private static int roundUp(final int i) {
+  private static int roundUp(final int ¢) {
     int $ = 1;
-    while ($ < i)
+    while ($ < ¢)
       $ <<= 1;
     return $;
   }
@@ -79,8 +79,8 @@ public class Integers {
    *        <code><b>null</b></code>.
    * @return <code><b>this</b></code> */
   public Integers add(final int... is) {
-    for (final int n : is)
-      add(n);
+    for (final int ¢ : is)
+      add(¢);
     return this;
   }
 
@@ -97,11 +97,11 @@ public class Integers {
   }
 
   /** Determine whether a given value is in this set.
-   * @param i an arbitrary integer
+   * @param ¢ an arbitrary integer
    * @return <code><b>true</b></code> if, and only if, the parameter is
    *         contained in this set. */
-  public boolean contains(final int i) {
-    return location(i) >= 0;
+  public boolean contains(final int ¢) {
+    return location(¢) >= 0;
   }
 
   /** Check whether an array of integers is contained in this set.
@@ -109,8 +109,8 @@ public class Integers {
    * @return <code><b>true</b></code> if, and only if, all elements in the array
    *         are contained in this set */
   public boolean contains(final int... is) {
-    for (final int n : is)
-      if (!contains(n))
+    for (final int ¢ : is)
+      if (!contains(¢))
         return false;
     return true;
   }
@@ -120,8 +120,8 @@ public class Integers {
    * @return <code><b>true</b></code> if, and only if, this object is disjoint
    *         from the set of elements in the parameter */
   public boolean disjoint(final int... is) {
-    for (final int n : is)
-      if (contains(n))
+    for (final int ¢ : is)
+      if (contains(¢))
         return false;
     return true;
   }
@@ -130,9 +130,9 @@ public class Integers {
    * @return an array of all elements in this set. */
   public int[] entries() {
     final int @NonNull [] $ = new int @NonNull [size];
-    for (int i = 0, j = 0; i < capacity(); ++i)
-      if (occupied[i] && !placeholder[i])
-        $[j++] = data[i];
+    for (int ¢ = 0, j = 0; ¢ < capacity(); ++¢)
+      if (occupied[¢] && !placeholder[¢])
+        $[j++] = data[¢];
     return $;
   }
 
@@ -160,8 +160,8 @@ public class Integers {
    * @param is an array of integers; ; must not be <code><b>null</b></code>.
    * @return <code><b>this</b></code> */
   public Integers remove(final int... is) {
-    for (final int n : is)
-      remove(n);
+    for (final int ¢ : is)
+      remove(¢);
     return this;
   }
 
@@ -173,18 +173,18 @@ public class Integers {
 
   /** Find the index in the hash table into which the parameter could be
    * inserted.
-   * @param n some integer
+   * @param i some integer
    * @return -1 if the parameter is in the table already, otherwise, the index
    *         at which it could be safely inserted. */
-  protected int find(final int n) {
+  protected int find(final int i) {
     int $ = -1;
-    for (int i = hash(n), t = 0;; i += ++t) {
-      i &= data.length - 1;
-      if (placeholder[i] || !occupied[i])
-        $ = $ < 0 ? i : $;
-      if (!occupied[i])
+    for (int ¢ = hash(i), t = 0;; ¢ += ++t) {
+      ¢ &= data.length - 1;
+      if (placeholder[¢] || !occupied[¢])
+        $ = $ < 0 ? ¢ : $;
+      if (!occupied[¢])
         return $;
-      if (n == data[i])
+      if (i == data[¢])
         return -1;
     }
   }
@@ -218,7 +218,7 @@ public class Integers {
    * @return index of the element if the parameter is in the table, otherwise,
    *         -1; */
   private int location(final int i) {
-    for (int $ = hash(i), t = 0;; $ += ++t) {
+    for (int $ = hash(i), ¢ = 0;; $ += ++¢) {
       $ &= data.length - 1;
       if (!occupied[$])
         return -1;
