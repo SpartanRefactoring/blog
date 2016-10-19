@@ -177,8 +177,7 @@ public class Integers {
    * @return -1 if the parameter is in the table already, otherwise, the index
    *         at which it could be safely inserted. */
   protected int find(final int i) {
-    int $ = -1;
-    for (int ¢ = hash(i), t = 0;; ¢ += ++t) {
+    for (int $ = -1, ¢ = hash(i), t = 0;; ¢ += ++t) {
       ¢ &= data.length - 1;
       if (placeholder[¢] || !occupied[¢])
         $ = $ < 0 ? ¢ : $;
@@ -199,7 +198,7 @@ public class Integers {
     return reset(newCapacity).add(entries());
   }
 
-  final protected Integers reset(final int capacity) {
+  protected final Integers reset(final int capacity) {
     data = new int @NonNull [capacity];
     occupied = new boolean @NonNull [capacity];
     placeholder = new boolean @NonNull [capacity];
