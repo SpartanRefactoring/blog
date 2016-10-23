@@ -5,6 +5,8 @@ import static il.org.spartan.azzert.*;
 
 import java.util.*;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.junit.*;
 
 import il.org.spartan.streotypes.*;
@@ -25,7 +27,8 @@ import il.org.spartan.streotypes.*;
  * @since 27/08/2008 */
 @Utility public enum Prune {
   ;
-  public static <T, C extends Collection<T>> C nulls(final C ts) {
+  @NotNull
+  public static <T, C extends Collection<T>> C nulls(@NotNull final C ts) {
     for (final Iterator<T> ¢ = ts.iterator(); ¢.hasNext();)
       if (¢.next() == null)
         ¢.remove();
@@ -39,7 +42,8 @@ import il.org.spartan.streotypes.*;
    *         <code><b>null</b></code> elements of the parameter, and in the same
    *         order. No <code><b>null</b></code> elements are present on this
    *         returned collection. */
-  public static <T> List<T> nulls(final Iterable<T> ts) {
+  @NotNull
+  public static <T> List<T> nulls(@NotNull final Iterable<T> ts) {
     final ArrayList<T> $ = new ArrayList<>();
     for (final T ¢ : ts)
       if (¢ != null)
@@ -54,7 +58,7 @@ import il.org.spartan.streotypes.*;
    *         <code><b>null</b></code> elements of the parameter, and in the same
    *         order. No <code><b>null</b></code> elements are present on this
    *         returned collection. */
-  public static <T> T[] nulls(final T[] ts) {
+  public static <T> T[] nulls(@NotNull final T[] ts) {
     final List<T> $ = new ArrayList<>();
     for (final T ¢ : ts)
       if (¢ != null)
@@ -62,7 +66,7 @@ import il.org.spartan.streotypes.*;
     return $.toArray(shrink(ts));
   }
 
-  public static <T> String[] whites(final T... ts) {
+  public static <T> String[] whites(@NotNull final T... ts) {
     final List<String> $ = new ArrayList<>();
     for (final T ¢ : ts)
       if (¢ != null)
@@ -70,7 +74,7 @@ import il.org.spartan.streotypes.*;
     return $.toArray(new String[0]);
   }
 
-  private static void addNonEmpty(final Collection<String> ss, final String s) {
+  private static void addNonEmpty(@NotNull final Collection<String> ss, @NotNull final String s) {
     if (s.length() > 0)
       ss.add(s);
   }
@@ -79,7 +83,7 @@ import il.org.spartan.streotypes.*;
    * @param <T> type of elements in the input array.
    * @param ¢ an array of values.
    * @return an array of size 0 of elements of type <code>T</code>. */
-  private static <T> T[] shrink(final T[] ¢) {
+  private static <T> T[] shrink(@NotNull final T[] ¢) {
     return Arrays.copyOf(¢, 0);
   }
 
@@ -87,6 +91,7 @@ import il.org.spartan.streotypes.*;
    * @author Yossi Gil, the Technion.
    * @since 27/08/2008 */
   @SuppressWarnings({ "static-method", "synthetic-access" }) public static class TEST {
+    @Nullable
     final String[] alternatingArray = new String[] { null, "A", null, null, "B", null, null, null, "C", null };
     final String[] nonNullArray = { "1", "2", "4" };
     private ArrayList<String> sparseCollection;
