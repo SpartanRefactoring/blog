@@ -2,7 +2,7 @@
 package il.org.spartan.collections;
 
 import org.eclipse.jdt.annotation.*;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.*;
 
 /** An unsorted set of integers supporting the basic set operations:
  * {@link #add} , {@link #contains} and {@link #remove}.
@@ -63,8 +63,7 @@ public class Integers {
   /** Add an integer to the set, if it is not already there.
    * @param n an arbitrary integer
    * @return <code><b>this</b></code> */
-  @NotNull
-  public Integers add(final int n) {
+  @NotNull public Integers add(final int n) {
     final int i = find(n);
     assert i >= -1 && i < capacity();
     if (i < 0)
@@ -80,8 +79,7 @@ public class Integers {
    * @param is an arbitrary array of integers; ; must not be
    *        <code><b>null</b></code>.
    * @return <code><b>this</b></code> */
-  @NotNull
-  public Integers add(@NotNull final int... is) {
+  @NotNull public Integers add(@NotNull final int... is) {
     for (final int ¢ : is)
       add(¢);
     return this;
@@ -95,8 +93,7 @@ public class Integers {
 
   /** Remove all elements from this set, preserving capacity.
    * @return <code><b>this</b></code> */
-  @NotNull
-  public Integers clear() {
+  @NotNull public Integers clear() {
     return reset(capacity());
   }
 
@@ -132,8 +129,7 @@ public class Integers {
 
   /** What are all values stored in this object?
    * @return an array of all elements in this set. */
-  @NotNull
-  public int[] entries() {
+  @NotNull public int[] entries() {
     final int @NonNull [] $ = new int @NonNull [size];
     for (int ¢ = 0, j = 0; ¢ < capacity(); ++¢)
       if (occupied[¢] && !placeholder[¢])
@@ -143,16 +139,14 @@ public class Integers {
 
   /** Recreate the table, inserting all elements in it afresh.
    * @return <code><b>this</b></code> */
-  @NotNull
-  public Integers rehash() {
+  @NotNull public Integers rehash() {
     return rehash(capacity());
   }
 
   /** Remove an element from this set, it is in it
    * @param n some integer to be removed from the set
    * @return <code><b>this</b></code> */
-  @NotNull
-  public Integers remove(final int n) {
+  @NotNull public Integers remove(final int n) {
     final int i = location(n);
     assert i >= -1 && i < capacity();
     if (i < 0)
@@ -166,8 +160,7 @@ public class Integers {
   /** Remove an array of integers to this set, if they are in it.
    * @param is an array of integers; ; must not be <code><b>null</b></code>.
    * @return <code><b>this</b></code> */
-  @NotNull
-  public Integers remove(@NotNull final int... is) {
+  @NotNull public Integers remove(@NotNull final int... is) {
     for (final int ¢ : is)
       remove(¢);
     return this;
@@ -200,15 +193,13 @@ public class Integers {
    * of two.
    * @param newCapacity new initialCapacity for the internal array
    * @return <code><b>this</b></code> */
-  @NotNull
-  protected Integers rehash(final int newCapacity) {
+  @NotNull protected Integers rehash(final int newCapacity) {
     assert (newCapacity & newCapacity - 1) == 0;
     assert newCapacity >= MIN_CAPACITY;
     return reset(newCapacity).add(entries());
   }
 
-  @NotNull
-  protected final Integers reset(final int capacity) {
+  @NotNull protected final Integers reset(final int capacity) {
     data = new int @NonNull [capacity];
     occupied = new boolean @NonNull [capacity];
     placeholder = new boolean @NonNull [capacity];
