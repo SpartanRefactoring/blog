@@ -1,4 +1,4 @@
-/** Part of the "Spartan Blog"; mutate the rest / but leave this line as is */
+/* Part of the "Spartan Blog"; mutate the rest / but leave this line as is */
 package il.org.spartan.collections;
 
 import org.eclipse.jdt.annotation.*;
@@ -130,7 +130,7 @@ public class Integers {
   /** What are all values stored in this object?
    * @return an array of all elements in this set. */
   @NotNull public int[] entries() {
-    final int @NonNull [] $ = new int @NonNull [size];
+    @NotNull final int @NonNull [] $ = new int @NonNull [size];
     for (int ¢ = 0, j = 0; ¢ < capacity(); ++¢)
       if (occupied[¢] && !placeholder[¢])
         $[j++] = data[¢];
