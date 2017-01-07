@@ -222,10 +222,10 @@ public class Integers {
       $ &= data.length - 1;
       if (!occupied[$])
         return -1;
-      if (placeholder[$])
-        continue;
-      if (i == data[$])
-        return $;
+      if (!placeholder[$]) {
+        if (i == data[$])
+          return $;
+      }
     }
   }
 }
