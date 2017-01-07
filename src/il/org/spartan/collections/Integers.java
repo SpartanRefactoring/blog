@@ -16,13 +16,9 @@ import org.jetbrains.annotations.*;
  * @author Yossi Gil
  * @since December 2010 */
 public class Integers {
-  /** */
   public static final float MAX_LOAD = 0.75f;
-  /** */
   public static final int MIN_CAPACITY = 4;
-  /** */
   public static final float MIN_LOAD = 0.25f;
-  /** */
   public static final float REMOVE_LOAD = 0.20f;
 
   static int hash(final int ¢) {
@@ -222,10 +218,8 @@ public class Integers {
       $ &= data.length - 1;
       if (!occupied[$])
         return -1;
-      if (!placeholder[$]) {
-        if (i == data[$])
-          return $;
-      }
+      if (!placeholder[$] && i == data[$])
+        return $;
     }
   }
 }
